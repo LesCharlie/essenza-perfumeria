@@ -1,0 +1,457 @@
+:root {
+  --rosa: hsl(349, 100%, 78%);
+  --rosaOscuro: #e76782;
+  --gris: #f7f7f7;
+  --negro: #222;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: var(--negro);
+  background: var(--gris);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: "Playfair Display", serif;
+}
+
+.hero {
+  background: url('https://img77.uenicdn.com/image/upload/v1548677428/category/shutterstock_1038821137.jpg') center/cover;
+  color: #fff;
+  text-align: center;
+  padding: 6rem 1.5rem;
+  position: relative;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.hero.fading-out {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+.hero.fading-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 50;
+  max-width: 1000px; /* o 500px, ajústalo a tu gusto */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+}
+.hero p {
+  font-size: 1.2rem;
+}
+
+/* ---------- CONTENEDOR GENERAL ---------- */
+.contenedor {
+  max-width: 1140px;
+  margin: auto;
+  padding: 3rem 1rem;
+}
+
+/* ---------- PERFUMES ---------- */
+.perfumes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card img:hover {
+  transform: scale(1.05);
+}
+
+.card-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.card-info h3 {
+  margin-bottom: 0.5rem;
+}
+
+.precio {
+  color: var(--rosaOscuro);
+  font-weight: bold;
+}
+
+/* ---------- SOBRE NOSOTROS ---------- */
+.sobre {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* ---------- NEWSLETTER ---------- */
+.newsletter {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.newsletter input {
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--rosa);
+  border-radius: 6px;
+  width: 260px;
+  max-width: 80%;
+  margin-right: 0.5rem;
+}
+
+.newsletter button {
+  padding: 0.78rem 1.5rem;
+  background: var(--rosa);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter button:hover {
+  background: var(--rosaOscuro);
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: var(--negro);
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+}
+
+footer a {
+  color: var(--rosa);
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+/* ---------- ALERTA ---------- */
+.alert-exito {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #38c172;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.alert-exito.activo {
+  opacity: 1;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .hero {
+    padding: 4rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
+
+/* ---------- EFECTO DE PUNTOS BRILLANTES ---------- */
+/* capa 1: puntos grandes, brillo intenso */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;          /* no bloquea clics */
+  z-index:-1;                   /* queda detrás de todo */
+}
+
+/* — capa “cercana” — */
+body::before{
+  background:
+    radial-gradient(circle, rgba(250, 108, 165, 0.9) 0 2px, transparent 6px);
+  background-size:150px 100px;  /* distancia entre puntos */
+  background-position: var(--spark-pos1, 0 0);   /* ⬅ NUEVO */
+  animation:sparkleMove 22s linear infinite,
+           sparkleFlash 1.8s ease-in-out infinite;
+}
+
+/* — capa “lejana” (puntos más pequeños y difusos) — */
+body::after{
+  background:
+    radial-gradient(circle, rgba(255,255,255,.4) 0 2px, transparent 4px);
+  background-size:260px 260px;
+  animation:sparkleMove2 40s linear infinite,
+           sparkleFlash 2.5s ease-in-out infinite;
+  filter:blur(0.5px);           /* da sensación de profundidad */
+  background-position: var(--spark-pos2, 0 0);   /* ⬅ NUEVO */
+}
+
+/* Traslación diagonal lenta */
+@keyframes sparkleMove{
+  from {background-position: 0 0;}
+  to   {background-position: -200px 200px;}
+}
+@keyframes sparkleMove2{
+  from {background-position: 0 0;}
+  to   {background-position: 260px -260px;}
+}
+
+/* Pequeño “parpadeo” aleatorio */
+@keyframes sparkleFlash{
+  0%,100%{opacity:1;}
+  50%   {opacity:.6;}
+}
+
+
+/* ---------- MENÚ PRINCIPAL ---------- */
+.main-menu{
+  margin-top:1px;                 /* espacio de 1 px pedido */
+  background:#fff;                /* fondo liso opcional */
+  display:flex;                   /* permite centrar/alinear si hace falta */
+  justify-content:center;
+  z-index:10;
+}
+
+.main-menu ul{
+  display:flex;
+  gap:1.5rem;                     /* separación horizontal */
+  padding:.6rem 1rem;
+}
+
+.main-menu li{
+  list-style:none;
+}
+
+.main-menu a{
+  position:relative;
+  display:block;
+  padding:.6rem 1.2rem;
+  font-size:18px;
+  font-weight:600;
+  text-transform:uppercase;
+  color:var(--negro);
+  text-decoration:none;
+  transition:.5s;
+  z-index:1;
+}
+
+/*--------------- animación marco + relleno ---------------*/
+.main-menu a::before,
+.main-menu a::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  transition:.3s;
+  pointer-events:none;
+}
+
+.main-menu a::before{                 /* líneas superior e inferior */
+  border-top:2px solid var(--negro);
+  border-bottom:2px solid var(--negro);
+  transform:scaleY(2);
+  opacity:0;
+}
+
+.main-menu a::after{                  /* relleno */
+  top:2px;                            /* deja ver la línea superior */
+  background:var(--negro);
+  transform:scaleY(0);
+  opacity:0;
+  z-index:-1;
+}
+
+.main-menu a:hover{
+  color:#fff;
+}
+
+.main-menu a:hover::before{
+  transform:scaleY(1);
+  opacity:1;
+}
+
+.main-menu a:hover::after{
+  transform:scaleY(1);
+  opacity:1;
+}
+
+/* ---------- RESPONSIVE: menú en columna <=600px ---------- */
+@media (max-width:600px){
+  .main-menu ul{
+    flex-direction:column;
+    align-items:center;
+    gap:0;
+  }
+  .main-menu a{
+    padding:.8rem 1rem;
+  }
+}
+
+
+/* ---------- SOBRE NOSOTROS CON FLEX ---------- */
+.sobre--flex{
+  display:flex;
+  align-items:center;
+  gap:2rem;              /* espacio entre texto y logo */
+  flex-wrap:wrap;        /* pasa a columna si no cabe */
+}
+
+/* Ajustes del texto para que no se pegue al borde */
+.sobre-texto{
+  flex:1 1 280px;        /* crece y encoge pero con un mínimo */
+}
+
+/* LOGO */
+.sobre-logo{
+  flex:0 0 220px;        /* ancho fijo (ajusta a tu gusto) */
+  display:flex;
+  justify-content:center;
+}
+
+.sobre-logo img{
+  max-width:220px;       /* ajusta tamaño máximo */
+  width:100%;
+  cursor:pointer;
+  border-radius:12px;
+  transition:opacity .3s ease; /* fade */
+}
+
+/* clase aplicada durante el cambio */
+.sobre-logo img.fade{
+  opacity:0;
+}
+
+/* ---------- RESPONSIVE (columna en pantallas pequeñas) ---------- */
+@media (max-width:600px){
+  .sobre--flex{
+    flex-direction:column;
+    text-align:center;
+  }
+  .sobre-logo{
+    margin-top:1rem;
+  }
+}
+
+
+.btn-whatsapp {
+  --rosaEssenza: #e76782;
+  background: var(--rosaEssenza);
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer; 
+  position: relative;
+  overflow: visible; /* ✅ Cambiar esto */
+  transition: transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  text-align: center;
+}
+
+
+  .btn-whatsapp:active {
+    transform: scale(0.96);
+  }
+
+  .punto {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--rosaEssenza);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: puntoSalir 0.8s ease-out forwards;
+  }
+
+  @keyframes puntoSalir {
+    0% {
+      transform: translate(0, 0) scale(0.8);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--dx), var(--dy)) scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  .contacto {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  margin: 1rem 0 2rem;
+  padding: .8rem 2rem;
+  background: #25D366;          /* verde WhatsApp */
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-whatsapp:hover {
+  opacity: .85;
+}
+
+.ubicacion h3 {
+  margin-bottom: .5rem;
+}
+
+.ubicacion address {
+  font-style: normal;           /* evita cursiva por defecto */
+  line-height: 1.5;
+}
