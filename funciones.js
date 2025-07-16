@@ -215,3 +215,16 @@ document.querySelectorAll('.btn-elegante').forEach(btn => {
 });
 
 window.addEventListener('DOMContentLoaded', renderCarrito);
+
+document.querySelectorAll('.btn-elegante').forEach(btn => {
+  btn.addEventListener('click', e => {
+    /* ⬇ evita que el enlace padre # haga scroll arriba */
+    e.preventDefault();
+    e.stopPropagation();
+
+    carrito.push({ nombre: btn.dataset.nombre, precio: btn.dataset.precio });
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    renderCarrito();
+  });
+});
+
