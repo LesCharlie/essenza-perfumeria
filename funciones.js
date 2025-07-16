@@ -167,3 +167,43 @@ if (logo) {
       punto.addEventListener('animationend', () => punto.remove());
     }
   }
+
+
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+function renderCarrito(){
+  const list  = document.getElementById('cartList');
+  const total = document.getElementById('cartTotal');
+  list.innerHTML = '';
+  let suma = 0;
+
+  carrito.forEach(({nombre,precio},i)=>{
+    const li = document.createElement('li');
+    li.textContent = `${nombre} — $${precio}`;
+    list.appendChild(li);
+    suma += +precio;
+  });
+
+  total.textContent = suma;
+  document.getElementById('miniCart').classList.toggle('oculto', carrito.length===0);
+
+  /* link WhatsApp */
+  const mensaje = encodeURIComponent(
+      '¡Hola! Quiero pedir:\n' +
+      carrito.map(p=>`• ${p.nombre} - $${p.precio} MXN`).join('\n') +
+      `\nTotal: $${suma} MXN`
+  );
+  document.getElementById('enviarWa').href =
+      `https://chat.whatsapp.com/EHREDxF5ZoU7ggl70O1iYW`;
+}
+
+document.querySelectorAll('.btn-agregar').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    carrito.push({nombre:btn.dataset.nombre, precio:btn.dataset.precio});
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    renderCarrito();
+  });
+});
+
+window.addEventListener('DOMContentLoaded', renderCarrito);
+

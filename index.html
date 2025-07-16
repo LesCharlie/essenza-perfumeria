@@ -59,6 +59,11 @@
           <div class="card-info">
             <h3>NAUTICA</h3>
             <p class="precio">$950 MXN</p>
+            <button class="btn-agregar"
+          data-nombre="Nautica"
+          data-precio="950">
+          Añadir
+  </button>
           </div>
         </a>
         <a href="#" class="card">
@@ -112,6 +117,15 @@
         </a>
       </div>
     </section>
+
+        <!-- al final de <body> -->
+<div id="miniCart" class="mini-cart oculto">
+  <h4>Carrito</h4>
+  <ul id="cartList"></ul>
+  <p>Total: $<span id="cartTotal">0</span> MXN</p>
+  <a id="enviarWa" class="btn-whatsapp" href="#" target="_blank">Enviar pedido</a>
+</div>
+
 
     <!-- SOBRE NOSOTROS -->
     <section id="sobre" class="contenedor sobre sobre--flex">
@@ -167,8 +181,6 @@
       <a href="https://www.facebook.com">Facebook</a>
     </div>
   </footer>
-
-
 
   <!-- Script principal -->
   <script src="funciones.js"></script>
