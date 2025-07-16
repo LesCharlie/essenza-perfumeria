@@ -168,8 +168,7 @@ if (logo) {
     }
   }
 
-
-let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 function renderCarrito(){
   const list  = document.getElementById('cartList');
@@ -188,12 +187,13 @@ function renderCarrito(){
   document.getElementById('miniCart').classList.toggle('oculto', carrito.length === 0);
 
   // Link a WhatsApp
+  const telefono = "523325310977";          // sin + ni espacios
   const mensaje = encodeURIComponent(
     '¡Hola! Quiero pedir:\n' +
     carrito.map(p => `• ${p.nombre} - $${p.precio} MXN`).join('\n') +
     `\nTotal: $${suma} MXN`
   );
-  document.getElementById('enviarWa').href = `https://wa.me/5210000000000?text=${mensaje}`;
+  document.getElementById('enviarWa').href = `https://wa.me/${telefono}?text=${mensaje}`;
 
   // Asignar eventos de eliminar
   document.querySelectorAll('.eliminar').forEach(btn => {
@@ -228,3 +228,16 @@ document.querySelectorAll('.btn-elegante').forEach(btn => {
   });
 });
 
+/* Delegación: un solo listener en el contenedor */
+document.querySelector('.perfumes-grid').addEventListener('click', e => {
+  const btn = e.target.closest('.btn-elegante');
+  if (!btn) return;            // clic fuera de botones
+
+  e.preventDefault();
+  carrito.push({
+    nombre: btn.dataset.nombre,
+    precio: btn.dataset.precio
+  });
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  renderCarrito();
+});
