@@ -31,15 +31,13 @@ h1, h2, h3 {
   transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
 
-.hero.fading-out {
+.hero.fading-out{
   opacity: 0;
-  transform: scale(1.03);
+}
+.hero.fading-in{
+  opacity: 1;
 }
 
-.hero.fading-in {
-  opacity: 1;
-  transform: scale(1);
-}
 
 .hero::after {
   content: "";
