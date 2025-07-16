@@ -169,7 +169,7 @@ if (logo) {
   }
 
 
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 function renderCarrito(){
   const list  = document.getElementById('cartList');
@@ -177,33 +177,41 @@ function renderCarrito(){
   list.innerHTML = '';
   let suma = 0;
 
-  carrito.forEach(({nombre,precio},i)=>{
+  carrito.forEach(({nombre,precio}, i) => {
     const li = document.createElement('li');
-    li.textContent = `${nombre} — $${precio}`;
+    li.innerHTML = `${nombre} — $${precio} <button class="eliminar" data-index="${i}">❌</button>`;
     list.appendChild(li);
     suma += +precio;
   });
 
   total.textContent = suma;
-  document.getElementById('miniCart').classList.toggle('oculto', carrito.length===0);
+  document.getElementById('miniCart').classList.toggle('oculto', carrito.length === 0);
 
-  /* link WhatsApp */
+  // Link a WhatsApp
   const mensaje = encodeURIComponent(
-      '¡Hola! Quiero pedir:\n' +
-      carrito.map(p=>`• ${p.nombre} - $${p.precio} MXN`).join('\n') +
-      `\nTotal: $${suma} MXN`
+    '¡Hola! Quiero pedir:\n' +
+    carrito.map(p => `• ${p.nombre} - $${p.precio} MXN`).join('\n') +
+    `\nTotal: $${suma} MXN`
   );
-  document.getElementById('enviarWa').href =
-      `https://chat.whatsapp.com/EHREDxF5ZoU7ggl70O1iYW`;
+  document.getElementById('enviarWa').href = `https://wa.me/5210000000000?text=${mensaje}`;
+
+  // Asignar eventos de eliminar
+  document.querySelectorAll('.eliminar').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.index);
+      carrito.splice(idx, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      renderCarrito();
+    });
+  });
 }
 
-document.querySelectorAll('.btn-agregar').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    carrito.push({nombre:btn.dataset.nombre, precio:btn.dataset.precio});
+document.querySelectorAll('.btn-elegante').forEach(btn => {
+  btn.addEventListener('click', () => {
+    carrito.push({ nombre: btn.dataset.nombre, precio: btn.dataset.precio });
     localStorage.setItem('carrito', JSON.stringify(carrito));
     renderCarrito();
   });
 });
 
 window.addEventListener('DOMContentLoaded', renderCarrito);
-
