@@ -453,3 +453,79 @@ body::after{
   font-style: normal;           /* evita cursiva por defecto */
   line-height: 1.5;
 }
+
+/* ========== MÓVILES PEQUEÑOS (hasta 480px) ========== */
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .main-menu ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 0;
+  }
+
+  .main-menu a {
+    padding: 0.8rem 1rem;
+    font-size: 16px;
+  }
+
+  .perfumes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card img {
+    height: 200px;
+  }
+
+  .sobre--flex {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sobre-logo {
+    margin-top: 1rem;
+  }
+
+  .newsletter h3,
+  .contacto h3 {
+    font-size: 1.1rem;
+  }
+
+  .btn-whatsapp {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+/* ========== TABLETS (hasta 768px) ========== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .card img {
+    height: 220px;
+  }
+
+  .sobre--flex {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .perfumes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
